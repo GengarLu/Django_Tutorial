@@ -29,12 +29,12 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['django-tutorial-u7ci.onrender.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['django-tutorial-u7ci.onrender.com/']
 
-CSRF_TRUSTED_ORIGINS = ['https://django-tutorial-u7ci.onrender.com/']
+# CSRF_TRUSTED_ORIGINS = ['https://django-tutorial-u7ci.onrender.com/']
 
 # Application definition
 INSTALLED_APPS = [
@@ -144,7 +144,6 @@ DATABASES = {
 }
 """
 
-"""
 # Local Postgres
 DATABASES = {
     'default': {
@@ -156,14 +155,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-"""
 
+"""
 # Render Postgres
 import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
