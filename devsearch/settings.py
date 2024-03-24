@@ -159,15 +159,10 @@ DATABASES = {
 """
 
 # Render Postgres
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DevsearchDatabase',
-        'USER': 'devsearchdatabase_ptvw_user',
-        'PASSWORD': 'iN7h0FFgTit7Pe1PmrHJhaZZOQVz6CK9',
-        'HOST': 'dpg-co02e2ud3nmc73f6abkg-a',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
 
 # Password validation
