@@ -32,9 +32,9 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = False
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['django-tutorial-u7ci.onrender.com/']
 
-# CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = ['https://django-tutorial-u7ci.onrender.com/']
 
 # Application definition
 INSTALLED_APPS = [
