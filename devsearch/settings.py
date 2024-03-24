@@ -31,8 +31,10 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
+# CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -142,6 +144,7 @@ DATABASES = {
 }
 """
 
+"""
 # Local Postgres
 DATABASES = {
     'default': {
@@ -150,6 +153,19 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'allen0411',
         'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+"""
+
+# Render Postgres
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'DevsearchDatabase',
+        'USER': 'devsearchdatabase_ptvw_user',
+        'PASSWORD': 'iN7h0FFgTit7Pe1PmrHJhaZZOQVz6CK9',
+        'HOST': 'dpg-co02e2ud3nmc73f6abkg-a',
         'PORT': '5432',
     }
 }
