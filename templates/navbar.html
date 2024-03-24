@@ -1,0 +1,37 @@
+{% load static %}
+
+<!-- Header Section -->
+<header class="header">
+    <div class="container container--narrow">
+        <a href="{% url 'profiles' %}" class="header__logo"> <!-- 連到主頁 -->
+            <img src="{% static 'images/logo.svg' %}" alt="DevSearch Logo" />
+        </a>
+        <nav class="header__nav">
+            <input type="checkbox" id="responsive-menu" />
+            <label for="responsive-menu" class="toggle-menu">
+                <span>Menu</span>
+                <div class="toggle-menu__lines"></div>
+            </label>
+            <ul class="header__menu">
+                <li class="header__menuItem"><a href="{% url 'profiles' %}">Developers</a></li>
+                <li class="header__menuItem"><a href="{% url 'projects' %}">Projects</a></li>
+
+                <!-- user.is_authenticated用戶登入且驗證通過，右上角變Logout -->
+                {% if request.user.is_authenticated %}
+                    <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+                    <li class="header__menuItem">
+                        <a href="{% url 'account' %}">Account</a>
+                    </li>
+                    <li class="header__menuItem">
+                        <a href="{% url 'logout' %}" class="btn btn--sub">Logout</a>
+                    </li>
+                <!-- 否則一樣Login/Sign Up -->
+                {% else %}
+                    <li class="header__menuItem">
+                        <a href="{% url 'login' %}" class="btn btn--sub">Login/Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>

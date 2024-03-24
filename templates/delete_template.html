@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+
+                <form class="form" method="POST" action="">
+    
+                    {% csrf_token %}
+                    <p>Are you sure you want to delete "{{object}}"?</p>
+                    <!--
+                        request.GET 是一個字典，包含了所有 HTTP GET 方法傳遞的變數。
+                        當在 URL 中看到 ?next=some_value 這樣的結構時，some_value
+                        就可以透過 request.GET['next'] 來取得。
+                        但我個人覺得用{% url 'account' %}就好了
+                    -->
+                    <a class="btn btn--sub btn--lg  my-md" href="{{request.GET.next}}">Go back</a>
+    
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm" />
+                </form>
+
+            </div>
+        </div>
+    </main>
+{% endblock content %}

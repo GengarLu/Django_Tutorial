@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="{% url 'account' %}">
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                    <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z" />
+                </svg>
+            </a>
+            <br>
+
+            <!-- 一般的 Content-Type 往往只能傳送一種形式的資料，但在網頁的應用當中我們還可能想要
+                上傳檔案、圖片、影片在表單裡頭，這樣的需求促成了multipart/form-data規範的出現 -->
+            <form class="form" method="POST" enctype="multipart/form-data">
+                <!-- CSRF（Cross Site Request Forgery,跨站域請求偽造）是一種網絡的攻擊方式，
+                    該攻擊可以在受害者毫不知情的情況下以受害者名義偽造請求發送給受攻擊站點，
+                    從而在並未授權的情況下執行在權限保護之下的操作。簡單點說，就是攻擊者盜用了
+                    你的身份，以你的名義發送惡意請求。如以你的名義發送垃圾郵件，銀行卡轉賬等。
+                    https://www.itread01.com/articles/1487036360.html -->
+                {% csrf_token %}
+
+                <!-- 使用表單模板變數的其他方式如下:
+                    使用{{form}}，每個欄位都呈現為表格列。也可以將每個欄位呈現為
+                    清單項目(使用{{ form.as_ul }})或段落(使用{{ form.as_p }})的形式。 
+                    https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
+                    {{form.title}}、{{form.tags}}...... -->
+                {% for field in form %}
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                    <!-- <input class="input input--text" id="formInput#text" type="text" name="text"
+                        placeholder="Enter text" /> -->
+                </div>
+                {% endfor %}
+
+                <div class="form__field">
+                    {% for tag in project.tags.all %}
+                        <!-- &#215;代表x符號 -->
+                        <div class="project-tag tag tag--pill tag--main" data-tag="{{tag.id}}" 
+                        data-project="{{project.id}}">{{tag.name}} &#215;</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form__field">
+                    <label for="formInput#text">Tags</label>
+                    <textarea class="input" name="newtags" placeholder="Add tags here..."></textarea>
+                </div>
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}
