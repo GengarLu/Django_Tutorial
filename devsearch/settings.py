@@ -144,6 +144,7 @@ DATABASES = {
 }
 """
 
+"""
 # Local Postgres
 DATABASES = {
     'default': {
@@ -152,6 +153,19 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'allen0411',
         'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+"""
+
+# Render Postgres
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'devsearchdatabase_ptvw',
+        'USER': 'devsearchdatabase_ptvw_user',
+        'PASSWORD': 'iN7h0FFgTit7Pe1PmrHJhaZZOQVz6CK9',
+        'HOST': 'dpg-co02e2ud3nmc73f6abkg-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
