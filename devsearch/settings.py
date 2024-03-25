@@ -144,7 +144,6 @@ DATABASES = {
 }
 """
 
-"""
 # Local Postgres
 DATABASES = {
     'default': {
@@ -156,8 +155,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-"""
 
+"""
 # Render Postgres
 DATABASES = {
     'default': {
@@ -169,6 +168,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
 """
 # Render Postgres
