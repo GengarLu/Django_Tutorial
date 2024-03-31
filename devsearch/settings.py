@@ -12,29 +12,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from datetime import timedelta
 import os # 為了新增template路徑
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-import environ
-
-env = environ.Env()
-
-environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-bfu4oqwwx+s_47!9b8=gzy=02ou_d^3zfek1z1phedzdhv&=1%")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'True')=="True"
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['django-tutorial-u7ci.onrender.com/']
+ALLOWED_HOSTS = ['django-tutorial-u7ci.onrender.com', 'localhost', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://django-tutorial-u7ci.onrender.com/']
+CSRF_TRUSTED_ORIGINS = ['https://django-tutorial-u7ci.onrender.com']
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -157,9 +152,7 @@ DATABASES = {
     }
 }
 """
-
 """
-# Render Postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -175,9 +168,19 @@ DATABASES = {
 # Render Postgres
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+if not DEBUG:
+    DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -224,6 +227,8 @@ EMAIL_HOST_PASSWORD = "qpushplqxmmzdypr"
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Method 1
 STATICFILES_DIRS = [BASE_DIR / 'static']
